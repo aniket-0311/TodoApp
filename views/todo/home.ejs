@@ -1,0 +1,33 @@
+<% layout("layouts/boilerplate") %>
+
+
+<div class="row mb-3">
+    <div class="col-6 offset-3">
+        <h5 class="text-center">Welcome <%= user.name %></h5>
+        <div class="card shadow bg-body rounded">
+            <div class="card-header text-center bg-primary">
+              <h2>TodoList</h2>
+            </div>
+            <div class="card-body">
+                <% for(let t of todo) { %>
+                    <% for(let i = 0; i<t.todos.length; i++) { %> 
+                        <ul class="list-group my-2">
+                        <li class="list-group-item">
+                            <%= t.todos[i] %> 
+                            <a href="#" class="btn btn-sm btn-danger float-end mx-2">Delete</a>
+                            <a href="#" class="btn btn-sm btn-warning float-end">Edit</a>
+                        </li>
+                        </ul>
+                    <% } %>     
+                <% } %>  
+                <div class="input-group my-3 ">
+                    <form action="/api/todos/<%= user._id %>" method="POST" class="d-flex">
+                      <input type="text" name="todos" class="form-control" placeholder="Add Todo" required>
+                      <button class="btn btn-md btn-success mx-2">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
