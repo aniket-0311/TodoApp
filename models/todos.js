@@ -3,8 +3,20 @@ const Schema = mongoose.Schema;
 
 const todoSchema = new Schema({
     todos:[{
-        type:String,
-        required:true
+        // todo_id:{
+        //     type:  mongoose.Types.ObjectId
+        // },
+        todo_name:{
+            type:String,
+            default:""
+        },
+        date:{
+            type:String
+        },
+        category:{
+            type:String,
+            default:""
+        }
     }],
     userTodo:{
         type: Schema.Types.ObjectId,

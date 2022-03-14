@@ -1,33 +1,62 @@
 <% layout("layouts/boilerplate") %>
 
 
-<div class="row mb-3">
-    <div class="col-6 offset-3">
-        <h5 class="text-center">Welcome <%= user.name %></h5>
-        <div class="card shadow bg-body rounded">
-            <div class="card-header text-center bg-primary">
-              <h2>TodoList</h2>
-            </div>
-            <div class="card-body">
-                <% for(let t of todo) { %>
-                    <% for(let i = 0; i<t.todos.length; i++) { %> 
-                        <ul class="list-group my-2">
-                        <li class="list-group-item">
-                            <%= t.todos[i] %> 
-                            <a href="#" class="btn btn-sm btn-danger float-end mx-2">Delete</a>
-                            <a href="#" class="btn btn-sm btn-warning float-end">Edit</a>
-                        </li>
-                        </ul>
-                    <% } %>     
-                <% } %>  
-                <div class="input-group my-3 ">
-                    <form action="/api/todos/<%= user._id %>" method="POST" class="d-flex">
-                      <input type="text" name="todos" class="form-control" placeholder="Add Todo" required>
-                      <button class="btn btn-md btn-success mx-2">Add</button>
-                    </form>
+    <div class="row mb-3">
+        <div class="col-lg-6 offset-lg-3 col-md-8">
+            <h5 class="text-center">Welcome <%= user.name %>
+            </h5>
+            <div class="card shadow bg-body rounded">
+                <div class="card-header text-center bg-primary">
+                    <h2>TodoList</h2>
+                </div>
+                <div class="card-body">
+                    <!-- <ul class="list-group my-2">
+                        <li class="list-group-item"> -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Task</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Due Date</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let t of todo) { %>
+                                <% for(let i=0; i<t.todos.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= t.todos[i].todo_name %>
+                                        </td>
+                                        <td><%= t.todos[i].category %></td>
+                                        <td><%= t.todos[i].date %></td>
+                                        <td>
+                                            <form action="/api/todos/<%= user._id %>/<%= t.todos[i]._id %>" method="GET"
+                                                class="d-flex float-end mx-2">
+                                                <button class="btn btn-sm btn-danger ">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <% } %>
+                        </tbody>
+                    </table>
+
+                    <div class="input-group my-3 ">
+                        <form action="/api/todos/<%= user._id %>" method="POST" class="d-flex">
+                            <input type="text" name="todo_name" class="form-control mx-2" placeholder="TodoName" required>
+                            <input type="date" class="form-control mx-2" name="date" required>
+                            
+                            <select class="form-select form-select-sm " name="category" aria-label=".form-select-lg example">
+                                <option selected>Category</option>
+                                <option value="Personal">Personal</option>
+                                <option value="Work">Work</option>
+                                <option value="Other">Other</option>
+                              </select>
+                            <button class="btn btn-md btn-success mx-2">Add</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-

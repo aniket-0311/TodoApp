@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const cookieParser = require("cookie-parser");
+const methodOverride = require('method-override');
 
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
+app.use(methodOverride('_method'));
 
 // Middleware for routes
 app.use("/api/user", userRoute);
